@@ -39,6 +39,10 @@ app.use((_req, res, next) => {
 });
 
 app.use(express.json());
+
+// Set Cors Options before other routes for all possible routes, enabling preflight across the board
+app.options("*", cors(corsOptions));
+
 app.use("/api/auth/", authRoute);
 app.use("/api/posts/", accessControlRoutes);
 

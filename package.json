@@ -1,0 +1,13 @@
+{
+  "name": "advanced-state-management-with-redux-toolkit-quest",
+  "packageManager": "yarn@4.5.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "format": "yarn workspace @advanced-state-management-with-redux-toolkit-quest/frontend format && yarn workspace @advanced-state-management-with-redux-toolkit-quest/backend format",
+    "frontend:dev": "yarn workspace @advanced-state-management-with-redux-toolkit-quest/frontend dev",
+	"backend:serve": "yarn workspace @advanced-state-management-with-redux-toolkit-quest/backend serve"
+  }
+}

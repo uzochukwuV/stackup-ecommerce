@@ -1,6 +1,6 @@
 import BlogModel from "../../../models/BlogModel.js";
 
-const createPost = async (req, res) => {
+const updatePost = async (req, res) => {
 	try {
 		const authorUserName =
 			req.signedCookies["advanced-state-management-user"].username;
@@ -13,32 +13,43 @@ const createPost = async (req, res) => {
 				ok: false,
 			});
 		}
-		const { title, content } = req.body;
-		if (!title || !content) {
+
+		const { id: blogPostId, title, content } = req.body;
+		if (!blogPostId || !title || !content) {
 			return res.status(400).json({
-				error: "Malformed Input. Title or description cannot be empty",
+				error: "Malformed Input. Invalid Request",
+				message: "One or more of the inputs are empty",
 				status: 400,
 				ok: false,
 			});
 		}
-		await BlogModel.create({
-			authorId: authorId,
-			authorUserName: authorUserName,
-			title: title,
-			content: content,
+
+		const post = await BlogModel.findOne({
+			where: {
+				id: blogPostId,
+				authorId: authorId,
+			},
 		});
 
+		post.title = title;
+		post.content = content;
+		post.updatedAt = Date.now();
+
+		await post.save();
+
 		return res.status(200).json({
-			message: "Successfully created new blog post!",
+			message: "Successfully updated blog post!",
 			status: 200,
 			ok: true,
 		});
 	} catch (err) {
-		return res.status(500).json({
+		return res.status(503).json({
 			error: "Internal server error",
 			reason: err,
+			status: 503,
+			ok: false,
 		});
 	}
 };
 
-export default createPost;
+export default updatePost;

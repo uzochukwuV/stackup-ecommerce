@@ -16,7 +16,10 @@ const loadProfile = async (req, res) => {
 		});
 		if (!user) {
 			return res.status(400).json({
+				message: "Not Found",
 				error: "User does not exist",
+				status: 400,
+				ok: false,
 			});
 		}
 		return res.status(200).json({
@@ -26,6 +29,8 @@ const loadProfile = async (req, res) => {
 		return res.status(503).json({
 			error: "Internal server error",
 			reason: err,
+			status: 503,
+			ok: false,
 		});
 	}
 };

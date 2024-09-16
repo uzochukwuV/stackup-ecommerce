@@ -2,9 +2,14 @@ import BlogModel from "../../../models/BlogModel.js";
 
 const allPosts = async (_req, res) => {
 	try {
-		const all = await BlogModel.findAll().catch((err) =>
-			console.error(`Failed to find all with ${err}`),
-		);
+		const all = await BlogModel.findAll().catch((err) => {
+			return res.status(404).json({
+				error: err,
+				message: "No posts found",
+				status: 404,
+				ok: false,
+			});
+		});
 
 		return res.status(200).json({
 			message: "Successfully updated blog post!",
@@ -13,9 +18,11 @@ const allPosts = async (_req, res) => {
 			posts: all,
 		});
 	} catch (err) {
-		return res.status(500).json({
+		return res.status(503).json({
 			error: "Internal server error",
 			reason: err,
+			status: 503,
+			ok: false,
 		});
 	}
 };

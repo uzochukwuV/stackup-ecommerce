@@ -17,7 +17,8 @@ const deletePost = async (req, res) => {
 		const { id: blogPostId, title } = req.body;
 		if (!title) {
 			return res.status(400).json({
-				error: "Malformed Input. Title or description cannot be empty",
+				error: "Malformed Input",
+				reason: "Title or description cannot be empty",
 				status: 400,
 				ok: false,
 			});
@@ -29,7 +30,8 @@ const deletePost = async (req, res) => {
 
 		if (!isDeleted) {
 			return res.status(404).json({
-				error: "Blog post does not exist.",
+				error: "Not Found",
+				reason: "Not able to delete specified resource.",
 				status: 404,
 				ok: false,
 			});
@@ -41,9 +43,11 @@ const deletePost = async (req, res) => {
 			ok: true,
 		});
 	} catch (err) {
-		return res.status(500).json({
+		return res.status(503).json({
 			error: "Internal server error",
 			reason: err,
+			status: 503,
+			ok: false,
 		});
 	}
 };

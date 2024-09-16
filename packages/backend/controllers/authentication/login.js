@@ -57,6 +57,7 @@ const login = async (req, res) => {
 				signed: true,
 				secure: true,
 				maxAge: 60 * 60 * 24 * 1000,
+				sameSite: "None",
 			},
 		);
 
@@ -64,6 +65,7 @@ const login = async (req, res) => {
 			token: token,
 			username: user.username,
 			userId: user.id,
+			email: user.email,
 			role: user.role,
 			status: 200,
 			ok: true,

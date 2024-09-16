@@ -27,6 +27,7 @@ const loadUserPosts = async (req, res) => {
 		if (!all) {
 			return res.status(400).json({
 				error: "User has not posted ever!",
+				message: "Empty resource",
 				status: 400,
 				ok: false,
 			});
@@ -41,9 +42,11 @@ const loadUserPosts = async (req, res) => {
 			posts: all,
 		});
 	} catch (err) {
-		return res.status(500).json({
+		return res.status(503).json({
 			error: "Internal server error",
 			reason: err,
+			status: 503,
+			ok: false,
 		});
 	}
 };
