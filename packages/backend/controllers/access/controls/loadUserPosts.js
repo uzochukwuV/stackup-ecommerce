@@ -44,7 +44,7 @@ const loadUserPosts = async (req, res) => {
 	} catch (err) {
 		return res.status(503).json({
 			error: "Internal server error",
-			reason: err,
+			message: err,
 			status: 503,
 			ok: false,
 		});

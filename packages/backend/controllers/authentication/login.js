@@ -10,8 +10,10 @@ const login = async (req, res) => {
 	try {
 		const { email, password } = req.body;
 		if (!email) {
-			return res.status(401).send({
-				message: "Invalid request",
+			return res.status(401).json({
+				error: "Invalid request",
+				ok: false,
+				status: 401,
 			});
 		}
 
@@ -24,7 +26,7 @@ const login = async (req, res) => {
 		console.log(user);
 		if (!user) {
 			return res.status(404).json({
-				error: "User does not exist",
+				message: "User does not exist",
 				ok: false,
 				status: 404,
 			});
@@ -33,7 +35,9 @@ const login = async (req, res) => {
 		const passwordMatch = await bcryptjs.compare(password, user.password);
 
 		if (!passwordMatch) {
-			return res.status(401).json({ error: "Invalid credentials" });
+			return res
+				.status(401)
+				.json({ error: "Invalid credentials", ok: false, status: 401 });
 		}
 
 		const token = jsonwebtoken.sign(
@@ -71,9 +75,11 @@ const login = async (req, res) => {
 			ok: true,
 		});
 	} catch (err) {
-		return res.status(500).json({
-			error: "Internal server err???or",
-			reason: err,
+		return res.status(503).json({
+			error: "Internal server error",
+			message: err,
+			status: 503,
+			ok: false,
 		});
 	}
 };

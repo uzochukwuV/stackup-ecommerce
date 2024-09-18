@@ -1,6 +1,7 @@
 import BlogModel from "../../../models/BlogModel.js";
 
 const deletePost = async (req, res) => {
+	console.log(req.body);
 	try {
 		const authorUserName =
 			req.signedCookies["advanced-state-management-user"].username;
@@ -8,7 +9,8 @@ const deletePost = async (req, res) => {
 
 		if (!authorUserName || !authorId) {
 			return res.status(401).json({
-				error: "Unauthorized or cookie has expired",
+				error: "Invalidated data",
+				message: "Unauthorized or cookie has expired",
 				status: 401,
 				ok: false,
 			});
@@ -18,7 +20,7 @@ const deletePost = async (req, res) => {
 		if (!title) {
 			return res.status(400).json({
 				error: "Malformed Input",
-				reason: "Title or description cannot be empty",
+				message: "Title or description cannot be empty",
 				status: 400,
 				ok: false,
 			});
@@ -31,7 +33,7 @@ const deletePost = async (req, res) => {
 		if (!isDeleted) {
 			return res.status(404).json({
 				error: "Not Found",
-				reason: "Not able to delete specified resource.",
+				message: "Not able to delete specified resource.",
 				status: 404,
 				ok: false,
 			});
@@ -45,7 +47,7 @@ const deletePost = async (req, res) => {
 	} catch (err) {
 		return res.status(503).json({
 			error: "Internal server error",
-			reason: err,
+			message: err,
 			status: 503,
 			ok: false,
 		});

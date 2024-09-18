@@ -19,7 +19,7 @@ accessControlRoutes.put("/post/update", tokenVerification, (req, res) =>
 );
 
 // no auth needed routes
-accessControlRoutes.get("/users/:username", (req, res) =>
+accessControlRoutes.get("/user/:username", (req, res) =>
 	loadUserPosts(req, res),
 );
 accessControlRoutes.get("/all", (req, res) => allPosts(req, res));
