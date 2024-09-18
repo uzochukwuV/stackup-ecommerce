@@ -7,6 +7,7 @@
   ],
   "scripts": {
     "format": "yarn workspace @advanced-state-management-with-redux-toolkit-quest/frontend format && yarn workspace @advanced-state-management-with-redux-toolkit-quest/backend format",
+	"lint": "yarn workspace @advanced-state-management-with-redux-toolkit-quest/frontend lint && yarn workspace @advanced-state-management-with-redux-toolkit-quest/backend lint",
     "frontend:dev": "yarn workspace @advanced-state-management-with-redux-toolkit-quest/frontend dev",
 	"backend:serve": "yarn workspace @advanced-state-management-with-redux-toolkit-quest/backend serve"
   }
