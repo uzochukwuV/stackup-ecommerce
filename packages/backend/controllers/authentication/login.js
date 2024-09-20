@@ -62,6 +62,7 @@ const login = async (req, res) => {
 				secure: true,
 				maxAge: 60 * 60 * 24 * 1000,
 				sameSite: "None",
+				partitioned: true,
 			},
 		);
 

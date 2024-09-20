@@ -23,6 +23,7 @@ const corsOptions = {
 		"http://localhost:5173",
 		"http://localhost:4173",
 		"http://[::1]:4173",
+		"http://[::1]:5173",
 	],
 	credentials: true, //included credentials as true
 	preflightContinue: false,

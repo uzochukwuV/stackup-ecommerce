@@ -11,11 +11,15 @@ const register = async (req, res) => {
 		// Check if user already exists
 		const user = await UserModel.findOne({ where: { username: username } });
 		if (user) {
-			return res.status(400).json({ message: "User already exists" });
+			return res
+				.status(400)
+				.json({ message: "User already exists", ok: false });
 		}
 		const emailExists = await UserModel.findOne({ where: { email: email } });
 		if (emailExists) {
-			return res.status(400).json({ message: "Email already taken" });
+			return res
+				.status(400)
+				.json({ message: "Email already taken", ok: false });
 		}
 
 		// Password Hashing
