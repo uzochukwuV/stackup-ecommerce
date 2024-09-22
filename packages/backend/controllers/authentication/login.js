@@ -48,6 +48,7 @@ const login = async (req, res) => {
 			},
 		);
 
+		const createdAt = new Date(Date.now());
 		res.cookie(
 			"advanced-state-management-user",
 			{
@@ -58,6 +59,7 @@ const login = async (req, res) => {
 			},
 			{
 				httpOnly: true,
+				created: createdAt.toLocaleDateString(),
 				signed: true,
 				secure: true,
 				maxAge: 60 * 60 * 24 * 1000,

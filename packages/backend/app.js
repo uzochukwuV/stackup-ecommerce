@@ -46,6 +46,7 @@ app.use((req, res, next) => {
 	);
 	res.header("Access-Control-Allow-Credentials", true);
 
+	// You might want to hard-code this if necessary.
 	const origin = req.get("origin") || req.get("referer");
 	res.header("Access-Control-Allow-Origin", origin);
 
