@@ -1,10 +1,19 @@
 import BlogModel from "../../../models/BlogModel.js";
+import dotenv from "dotenv";
+
+dotenv.config();
+const config = process.env;
+
+import jsonwebtoken from "jsonwebtoken";
+
+const jwt = jsonwebtoken;
 
 const updatePost = async (req, res) => {
 	try {
-		const authorUserName =
-			req.signedCookies["advanced-state-management-user"].username;
-		const authorId = req.signedCookies["advanced-state-management-user"].id;
+		const token = req.signedCookies["advanced-state-management-user"];
+		const user = jwt.verify(token, config.TOKEN);
+		const authorUserName = user.username ?? null;
+		const authorId = user.userId ?? null;
 
 		if (!authorUserName || !authorId) {
 			return res.status(401).json({

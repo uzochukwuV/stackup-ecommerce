@@ -41,32 +41,25 @@ const login = async (req, res) => {
 		}
 
 		const token = jsonwebtoken.sign(
-			{ user: { email: user.email, username: user.username } },
+			{ email: user.email, username: user.username, userId: user.id },
 			config.TOKEN,
 			{
 				expiresIn: 86400,
 			},
 		);
-
+		
 		const createdAt = new Date(Date.now());
-		res.cookie(
-			"advanced-state-management-user",
-			{
-				id: user.id,
-				username: user.username,
-				email: user.email,
-				token: token,
-			},
-			{
-				httpOnly: true,
-				created: createdAt.toLocaleDateString(),
-				signed: true,
-				secure: true,
-				maxAge: 60 * 60 * 24 * 1000,
-				sameSite: "None",
-				partitioned: true,
-			},
-		);
+
+		res.cookie("advanced-state-management-user", token, {
+			httpOnly: true,
+			signed: true,
+			secure: true,
+			maxAge: 60 * 60 * 24,
+			sameSite: "None",
+			partitioned: true,
+			created: createdAt.toDateString(),
+			path: "/",
+		});
 
 		return res.status(200).json({
 			token: token,
