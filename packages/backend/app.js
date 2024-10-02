@@ -26,7 +26,7 @@ const corsOptions = {
 		"http://[::1]:5173",
 	],
 	credentials: true, //included credentials as true
-	preflightContinue: false,
+	preflightContinue: true,
 };
 
 app.use(cors(corsOptions));
