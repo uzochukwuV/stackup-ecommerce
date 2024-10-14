@@ -23,6 +23,6 @@ yarn backend:serve
 
 A short video of the various functionalities
 
-[![Video Title](https://www.awesomescreenshot.com/video/32511545?key=42ac78bfb6edf18786947c73bcd79e4d)
+[![Video Title](./video.mp4)
 
 
