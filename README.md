@@ -27,22 +27,28 @@ https://github.com/user-attachments/assets/f772cdeb-fde6-4488-853b-1ce31d0e92cb
 
 Features
 
-Registering users
+Frontend
 
 packages\frontend\src\services\auth\authSlice.ts
+
 contains logic and state for handling authentication and user management
 
 packages\frontend\src\services\product\productSlice.ts
+
 contains logic and state for handling cart and product management
 
+Backend
 
 packages\backend\controllers\authentication
+
 handles authentication
 
 packages\backend\controllers\features\products
+
 handles product create and get
 
 packages\backend\controllers\features\user
+
 handles user delete and create by admin
 
 
