@@ -23,6 +23,6 @@ yarn backend:serve
 
 A short video of the various functionalities
 
-[![Video Title](./video.mp4)]
+![Video Title](./video.mp4)
 
 
