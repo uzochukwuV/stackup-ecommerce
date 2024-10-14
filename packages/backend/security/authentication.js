@@ -8,6 +8,8 @@ const jwt = jsonwebtoken;
 
 const tokenVerification = (req, res, next) => {
 	const [, token] = req.headers.authorization.split(" ");
+	
+	
 
 	if (!token) {
 		return res.status(403).send({
@@ -19,6 +21,8 @@ const tokenVerification = (req, res, next) => {
 
 	try {
 		jwt.verify(token, config.TOKEN);
+		req.signedCookies["advanced-state-management-user"]=token;
+		
 	} catch (_err) {
 		console.error("Failed to authenticate token");
 		return res.status(401).send({

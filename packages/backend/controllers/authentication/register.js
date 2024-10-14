@@ -3,8 +3,8 @@ import bcrypt from "bcryptjs";
 
 const register = async (req, res) => {
 	try {
-		console.log(req);
-		let { username, password, email } = req.body;
+		
+		let { username, password, email, role } = req.body;
 		if (!username || !password || !email) {
 			return res.status(400).json({ message: "Invalid Request" });
 		}
@@ -32,12 +32,12 @@ const register = async (req, res) => {
 			email: email,
 			password: password,
 			salt: salt,
-			role: "blogger",
+			role: role,
 		});
 
 		return res.status(200).json({ message: "User Created", ok: true });
 	} catch (error) {
-		console.log(error);
+		
 		return res.status(500).json({ message: "Server Error" });
 	}
 };

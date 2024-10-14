@@ -41,13 +41,18 @@ const login = async (req, res) => {
 		}
 
 		const token = jsonwebtoken.sign(
-			{ email: user.email, username: user.username, userId: user.id },
+			{
+				email: user.email,
+				username: user.username,
+				userId: user.id,
+				role: user.role,
+			},
 			config.TOKEN,
 			{
 				expiresIn: 86400,
 			},
 		);
-		
+
 		const createdAt = new Date(Date.now());
 
 		res.cookie("advanced-state-management-user", token, {

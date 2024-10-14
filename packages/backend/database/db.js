@@ -1,21 +1,41 @@
 import { Sequelize } from "sequelize";
 
-const sequelizeBlogs = new Sequelize({
-	database: "blogs",
+const sequelizeTransactions = new Sequelize({
+	database: "transactions",
 	dialect: "sqlite",
-	storage: "./database/blogs.sqlite",
+	storage: "./database/transactions.sqlite",
 	logging: false,
 });
 
-sequelizeBlogs
+sequelizeTransactions
 	.authenticate()
 	.then(async () => {
-		await sequelizeBlogs
+		await sequelizeTransactions
 			.sync({ alter: true })
-			.then(() => console.log("Database is synchronised for blogs db"));
-		console.log("Connection established for blogs db");
+			.then(() => console.log("Database is synchronised for Transactions db"));
+		console.log("Connection established for Transactions db");
 	})
-	.catch((err) => console.error("Unable to connect to blogs database: ", err));
+	.catch((err) => console.error("Unable to connect to Transactions database: ", err));
+
+const sequelizeProducts = new Sequelize({
+	database: "products",
+	dialect: "sqlite",
+	storage: "./database/products.sqlite",
+	logging: false,
+});
+
+
+sequelizeProducts
+	.authenticate()
+	.then(async () => {
+		await sequelizeProducts
+			.sync({ alter: true })
+			.then(() => console.log("Database is synchronised for products db"));
+		console.log("Connection established for products db");
+	})
+	.catch((err) =>
+		console.error("Unable to connect to products database: ", err),
+	);
 
 const sequelizeUsers = new Sequelize({
 	database: "users",
@@ -34,4 +54,4 @@ sequelizeUsers
 	})
 	.catch((err) => console.error("Unable to connect to users database: ", err));
 
-export { sequelizeBlogs, sequelizeUsers };
+export { sequelizeProducts, sequelizeUsers };
